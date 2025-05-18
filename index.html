@@ -45,6 +45,32 @@
 </head>
 
 <body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function animateValueCustom(obj, start, end, duration, suffix) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    obj.textContent = value + suffix;
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        obj.textContent = end + suffix;
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            document.querySelectorAll('.timer').forEach(function (el) {
+                const end = parseInt(el.getAttribute('data-to'), 10);
+                const duration = parseInt(el.getAttribute('data-speed'), 10);
+                animateValueCustom(el, 0, end, duration, 'B $');
+            });
+        });
+    </script>
+
 
     <!-- Preloader Start -->
     <!-- <div class="se-pre-con"></div> -->
@@ -254,6 +280,26 @@
                     <img src="assets/img/illustrations/6.png" alt="Thumb">
                 </div>
                 <div class="col-lg-6 col-md-6 info">
+                    <div>
+                        <h2>Global Cloud Storage Market Value by Sector</h2>
+
+                        <h3>Overview</h3>
+                        <p>The global cloud storage market is experiencing rapid growth, projected to reach <strong>$425.76 billion</strong> by 2030, with a compound annual growth rate (CAGR) of <strong>24%</strong>. This expansion is fueled by increasing digitalization, rising data volumes from IoT devices, and cloud integration with artificial intelligence.</p>
+
+                        <h3>Market Value by Sector</h3>
+                        <p>The <strong>enterprise cloud storage sector</strong> dominates the industry, as businesses prioritize data management, security, and scalability. In 2025, the enterprise cloud storage market is estimated to be worth <strong>$145.23 billion</strong>, reflecting strong demand from corporations seeking reliable infrastructure.</p>
+
+                        <p>The <strong>private cloud storage sector</strong> is also growing significantly. With individuals needing secure remote access and backup solutions, the personal cloud storage market was valued at <strong>$58.91 billion</strong> in 2024 and is projected to rise to <strong>$70.75 billion</strong> by 2025.</p>
+
+                        <p>Overall, the <strong>global cloud storage market</strong> is expected to reach <strong>$254.84 billion</strong> by 2033, maintaining a steady CAGR of <strong>20.1%</strong>. The continued expansion highlights the shift toward cloud-based solutions across various industries, from finance to healthcare and technology.</p>
+
+                        <h3>Driving Factors</h3>
+                        <p>The surge in cloud storage adoption is driven by critical factors, including enhanced security protocols, increased reliance on remote work, and the need for scalable data solutions. As cybersecurity threats escalate, businesses and individuals alike are seeking storage providers that prioritize privacy and data integrity.</p>
+
+                        <p>For deeper insights into specific industry trends or cloud storage innovations, feel free to ask!</p>
+                    </div>
+
+
                     <h2>We're Building Modern <br> And Secure Cloud</h2>
                     <p>
                         The one-of-a-kind cloud storage system provides the most secure storage.
@@ -266,24 +312,24 @@
                         <li>Data centers</li>
                     </ul>
                     <div class="fun-facts">
-                        <h3>Outstanding annual results from our awesome Team</h3>
+                        <h3>Cloud Storage Market in Billion Dollars</h3>
                         <div class="row">
                             <div class="col-md-4 col-sm-4 item">
                                 <div class="fun-fact">
-                                    <div class="timer" data-to="75" data-speed="5000">75</div>
-                                    <span class="medium">Higher Profits</span>
+                                    <div class="timer" data-to="145" data-speed="5000">145</div>
+                                    <span class="medium">Enterprise</span>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 item">
                                 <div class="fun-fact">
-                                    <div class="timer" data-to="100" data-speed="5000">100</div>
-                                    <span class="medium">Satisfied</span>
+                                    <div class="timer" data-to="58" data-speed="5000">58</div>
+                                    <span class="medium">Private</span>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 item">
                                 <div class="fun-fact">
-                                    <div class="timer" data-to="98" data-speed="5000">98</div>
-                                    <span class="medium">Success Rate</span>
+                                    <div class="timer" data-to="254" data-speed="5000">254</div>
+                                    <span class="medium">Forecast 2033</span>
                                 </div>
                             </div>
                         </div>
@@ -621,7 +667,7 @@
                                 </div>
                                 <div class="content">
                                     <h4>Ease of Use</h4>
-                                    <p> 
+                                    <p>
                                         Our desktop solution seamlessly synchronizes files with the cloud and across all your devices. With support for Windows, Linux, and MacOS, you can always access your files effortlessly, ensuring a secure backup in the cloud—regardless of the operating system you use.
                                     </p>
                                 </div>
