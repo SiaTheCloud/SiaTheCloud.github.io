@@ -38,7 +38,15 @@
     <!-- ========== Google Fonts ========== -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800" rel="stylesheet">
-
+    <style>
+        .flarge {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 3rem; /* Font bello grande */
+            font-weight: bold; /* Grassetto per impatto */
+            letter-spacing: 0.05rem; /* Leggera spaziatura tra caratteri */
+            color: #222; /* Colore scuro, modificabile a piacere */
+        }
+    </style>
 
 </head>
 
@@ -52,34 +60,21 @@
                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                     const value = Math.floor(progress * (end - start) + start);
                     obj.textContent = value + suffix;
-
                     if (progress < 1) {
                         window.requestAnimationFrame(step);
                     } else {
-                        // Blocca la modifica del testo dopo l'animazione
-                        obj.setAttribute('data-animated', 'true');
+                        // Assicurati che il suffisso resti quello della valuta!
                         obj.textContent = end + suffix;
                     }
                 };
                 window.requestAnimationFrame(step);
             }
 
-            document.querySelectorAll('.timer').forEach(function (el) {
+            document.querySelectorAll('.increment').forEach(function (el) {
                 const end = parseInt(el.getAttribute('data-to'), 10);
                 const duration = parseInt(el.getAttribute('data-speed'), 10);
-                const suffix = el.getAttribute('data-suffix') || 'B $';
+                const suffix = el.getAttribute('data-suffix') || ' B$';
                 animateValueCustom(el, 0, end, duration, suffix);
-
-                // Impedisci modifiche successive se lo script originale fa override
-                const observer = new MutationObserver((mutations) => {
-                    mutations.forEach((mutation) => {
-                        if (!el.getAttribute('data-animated')) return;
-                        if (!el.textContent.includes(suffix)) {
-                            el.textContent = end + suffix;
-                        }
-                    });
-                });
-                observer.observe(el, { childList: true });
             });
         });
     </script>
@@ -329,19 +324,19 @@
                         <div class="row">
                             <div class="col-md-4 col-sm-4 item">
                                 <div class="fun-fact">
-                                    <div class="timer" data-to="145" data-speed="5000">145</div>
+                                    <div class="increment flarge" data-to="145" data-speed="5000">145</div>
                                     <span class="medium">Enterprise</span>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 item">
                                 <div class="fun-fact">
-                                    <div class="timer" data-to="58" data-speed="5000">58</div>
+                                    <div class="increment flarge" data-to="58" data-speed="5000">58</div>
                                     <span class="medium">Private</span>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 item">
                                 <div class="fun-fact">
-                                    <div class="timer" data-to="254" data-speed="5000">254</div>
+                                    <div class="increment flarge" data-to="254" data-speed="5000">254</div>
                                     <span class="medium">Forecast 2033</span>
                                 </div>
                             </div>
