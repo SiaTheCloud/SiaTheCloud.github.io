@@ -55,6 +55,7 @@
                     if (progress < 1) {
                         window.requestAnimationFrame(step);
                     } else {
+                        // Assicurati che il suffisso resti quello della valuta!
                         obj.textContent = end + suffix;
                     }
                 };
@@ -64,7 +65,9 @@
             document.querySelectorAll('.timer').forEach(function (el) {
                 const end = parseInt(el.getAttribute('data-to'), 10);
                 const duration = parseInt(el.getAttribute('data-speed'), 10);
-                animateValueCustom(el, 0, end, duration, 'B $');
+                // Imposta il suffisso desiderato UNA VOLTA e usalo sempre
+                const suffix = el.getAttribute('data-suffix') || 'B $';
+                animateValueCustom(el, 0, end, duration, suffix);
             });
         });
     </script>
