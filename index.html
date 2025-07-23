@@ -52,10 +52,12 @@
                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                     const value = Math.floor(progress * (end - start) + start);
                     obj.textContent = value + suffix;
+
                     if (progress < 1) {
                         window.requestAnimationFrame(step);
                     } else {
-                        // Assicurati che il suffisso resti quello della valuta!
+                        // Blocca la modifica del testo dopo l'animazione
+                        obj.setAttribute('data-animated', 'true');
                         obj.textContent = end + suffix;
                     }
                 };
@@ -65,9 +67,19 @@
             document.querySelectorAll('.timer').forEach(function (el) {
                 const end = parseInt(el.getAttribute('data-to'), 10);
                 const duration = parseInt(el.getAttribute('data-speed'), 10);
-                // Imposta il suffisso desiderato UNA VOLTA e usalo sempre
                 const suffix = el.getAttribute('data-suffix') || 'B $';
                 animateValueCustom(el, 0, end, duration, suffix);
+
+                // Impedisci modifiche successive se lo script originale fa override
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (!el.getAttribute('data-animated')) return;
+                        if (!el.textContent.includes(suffix)) {
+                            el.textContent = end + suffix;
+                        }
+                    });
+                });
+                observer.observe(el, { childList: true });
             });
         });
     </script>
